@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.dsens.docker-hosts-updater</string>
+    <string>dev.camacojo.docker-mac-hosts-updater</string>
 
     <key>ProgramArguments</key>
     <array>

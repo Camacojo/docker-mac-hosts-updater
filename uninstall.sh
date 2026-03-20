@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-DAEMON_PLIST="/Library/LaunchDaemons/com.dsens.docker-hosts-updater.plist"
+DAEMON_PLIST="/Library/LaunchDaemons/dev.camacojo.docker-mac-hosts-updater.plist"
 
 echo "Uninstalling docker-hosts-updater..."
 
