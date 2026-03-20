@@ -29,8 +29,8 @@ Example: a container with alias `gs-api.local` on IP `192.168.97.5` results in:
 ## Installation
 
 ```bash
-git clone <repo-url>
-cd docker-hosts-updater
+git clone https://github.com/Camacojo/docker-mac-hosts-updater.git
+cd docker-mac-hosts-updater
 sudo bash install.sh
 ```
 
