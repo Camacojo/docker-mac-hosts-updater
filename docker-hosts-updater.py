@@ -153,9 +153,10 @@ def run():
             "--filter", "event=start",
             "--filter", "event=die",
             "--filter", "event=destroy",
-            "--format", "{{.ID}} {{.Action}}",
+            "--format", "{{.Actor.ID}} {{.Action}}",
         ],
         stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
         text=True,
     )
 
@@ -170,6 +171,10 @@ def run():
                 add_entries(get_entries(cid))
             else:
                 refresh()
+        # stdout reached EOF: events subprocess exited
+        rc = proc.wait()
+        stderr = (proc.stderr.read() or "").strip() if proc.stderr else ""
+        log.warning("docker events exited rc=%s stderr=%r", rc, stderr)
     finally:
         proc.terminate()
 
@@ -183,7 +188,9 @@ def main():
         try:
             r = docker("info", timeout=3)
             if r.returncode != 0:
-                raise RuntimeError("Docker not available")
+                raise RuntimeError(
+                    f"docker info rc={r.returncode} stderr={r.stderr.strip()!r}"
+                )
             run()
         except Exception as e:
             log.warning("Error: %s, retrying in %ds", e, RETRY_INTERVAL)
